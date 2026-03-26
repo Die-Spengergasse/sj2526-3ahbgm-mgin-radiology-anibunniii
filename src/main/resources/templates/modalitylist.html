@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modality List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Room Nr</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m : ${modalities}">
+            <td th:text="${m.type}"></td>
+            <td th:text="${m.roomnr}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a href="/modality/add">new modality</a>
+    </p>
+</div>
+</body>
+</html>

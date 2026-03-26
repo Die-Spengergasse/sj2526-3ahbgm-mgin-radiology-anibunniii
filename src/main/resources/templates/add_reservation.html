@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Reservation</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <form th:action="@{/reservation/add}" th:object="${reservation}" method="post">
+
+    <label>Patient</label>
+    <select th:field="*{patient}" class="form-control">
+      <option th:each="p : ${patients}" th:value="${p.id}" th:text="${p.name}"></option>
+    </select>
+
+    <label>Modality</label>
+    <select th:field="*{modality}" class="form-control">
+      <option th:each="m : ${modalities}" th:value="${m.id}" th:text="${m.name}"></option>
+    </select>
+
+    <label>Reservation Time</label>
+    <input type="datetime-local" th:field="*{reservationTime}" class="form-control">
+
+    <label>Body Region</label>
+    <select th:field="*{bodyRegion}" class="form-control">
+      <option value="Head">Head</option>
+      <option value="Chest">Chest</option>
+      <option value="Abdomen">Abdomen</option>
+      <option value="Pelvis">Pelvis</option>
+      <option value="Spine">Spine</option>
+      <option value="Extremities">Extremities</option>
+    </select>
+
+    <label>Comment</label>
+    <textarea th:field="*{comment}" class="form-control" rows="3"></textarea>
+
+    <input type="submit" class="form-control" value="Save">
+  </form>
+</div>
+</body>
+</html>

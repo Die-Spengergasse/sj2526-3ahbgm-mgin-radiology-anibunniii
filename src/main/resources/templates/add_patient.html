@@ -6,12 +6,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <form th:action="@{/patient/add}" th:object="${patient}" method="post">
-            <input type="text" th:field="*{name}" class="form-control" placeholder="patient name">
-            birth date <input type="date" th:field="*{birth}" class="form-control">
-            <input type="submit" class="form-control" value="Save">
-        </form>
-    </div>
+<div class="container">
+    <form th:action="@{/patient/add}" th:object="${patient}" method="post">
+        <label>Name </label>
+        <input type="text" th:field="*{name}" class="form-control" placeholder="Patient name">
+
+        <label>Birth date</label>
+        <input type="date" th:field="*{birth}" class="form-control">
+
+        <label>SSN</label>
+        <input type="text" th:field="*{ssn}" class="form-control"
+               maxlength="9"
+               pattern="\d{9}"
+               inputmode="numeric"
+               placeholder="123456789"
+               title="SSN must be exactly 9 digits">
+
+        <label>Gender</label>
+        <div>
+            <input type="radio" th:field="*{gender}" value="M" id="male">
+            <label for="male">Male</label>
+
+            <input type="radio" th:field="*{gender}" value="F" id="female">
+            <label for="female">Female</label>
+
+            <input type="radio" th:field="*{gender}" value="D" id="diverse">
+            <label for="diverse">Diverse</label>
+        </div>
+
+        <input type="submit" class="form-control" value="Save">
+    </form>
+</div>
 </body>
 </html>

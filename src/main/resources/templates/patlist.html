@@ -12,12 +12,16 @@
             <tr>
                 <th>name</th>
                 <th>birth</th>
+                <th>ssn</th>
+                <th>gender</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="p : ${patients}">
                 <td th:text="${p.name}"></td>
                 <td th:text="${p.birth}"></td>
+                <td th:text="${p.ssn}"></td>
+                <td th:text="${p.gender}"></td>
             </tr>
         </tbody>
 
