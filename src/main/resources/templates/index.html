@@ -2,22 +2,117 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Greeting</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Radiology-Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .sakura-box {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--matcha-light) 100%);
+            border-radius: var(--radius);
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--pink-mid);
+            overflow: hidden;
+            position: relative;
+        }
+        .petal {
+            position: absolute;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0%   { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.5; }
+            100% { transform: translateY(310px) rotate(360deg); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>Radiology</h1>
-    Datum: <span th:text="${today}"></span>
-    <div>
-        <a href="/patient/list">patient list</a>
+
+<nav class="navbar">
+    <a href="/" class="navbar-brand">🌸 Radiology</a>
+    <ul class="navbar-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/patient/list">Patients</a></li>
+        <li><a href="/modality/list">Modalities</a></li>
+        <li><a href="/reservation/list">Reservations</a></li>
+    </ul>
+</nav>
+
+<div class="page">
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Welcome to <em>Radiology</em> Management</h1>
+            <p>Manage all the patients, modalities and reservations right here! - Anja :D</p>
+            <a href="/reservation/add" class="btn btn-primary">+ New Reservation</a>
+        </div>
+
+        <div class="sakura-box" id="sakuraBox">
+            <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+                <!-- Center -->
+                <circle cx="90" cy="90" r="10" fill="#f9d0dc"/>
+                <circle cx="90" cy="90" r="6" fill="#e8829e"/>
+
+                <circle cx="90" cy="78" r="2.5" fill="#c45e7a"/>
+                <circle cx="101" cy="83" r="2.5" fill="#c45e7a"/>
+                <circle cx="101" cy="97" r="2.5" fill="#c45e7a"/>
+                <circle cx="90" cy="102" r="2.5" fill="#c45e7a"/>
+                <circle cx="79" cy="97" r="2.5" fill="#c45e7a"/>
+                <circle cx="79" cy="83" r="2.5" fill="#c45e7a"/>
+                <!-- Petal 1 - top -->
+                <ellipse cx="90" cy="58" rx="16" ry="24" fill="#f9d0dc" opacity="0.95"/>
+                <ellipse cx="90" cy="58" rx="10" ry="18" fill="#fce8ef" opacity="0.6"/>
+                <!-- Petal 2 - top right -->
+                <ellipse cx="114" cy="68" rx="16" ry="24" fill="#f4b8cb" opacity="0.95" transform="rotate(72 114 68)"/>
+                <ellipse cx="114" cy="68" rx="10" ry="18" fill="#fce8ef" opacity="0.6" transform="rotate(72 114 68)"/>
+                <!-- Petal 3 - bottom right -->
+                <ellipse cx="105" cy="96" rx="16" ry="24" fill="#f9d0dc" opacity="0.95" transform="rotate(144 105 96)"/>
+                <ellipse cx="105" cy="96" rx="10" ry="18" fill="#fce8ef" opacity="0.6" transform="rotate(144 105 96)"/>
+                <!-- Petal 4 - bottom left -->
+                <ellipse cx="75" cy="96" rx="16" ry="24" fill="#f4b8cb" opacity="0.95" transform="rotate(216 75 96)"/>
+                <ellipse cx="75" cy="96" rx="10" ry="18" fill="#fce8ef" opacity="0.6" transform="rotate(216 75 96)"/>
+                <!-- Petal 5 - top left -->
+                <ellipse cx="66" cy="68" rx="16" ry="24" fill="#f9d0dc" opacity="0.95" transform="rotate(288 66 68)"/>
+                <ellipse cx="66" cy="68" rx="10" ry="18" fill="#fce8ef" opacity="0.6" transform="rotate(288 66 68)"/>
+                <!-- Branch -->
+                <path d="M20 160 Q60 120 90 90" stroke="#a07080" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M90 90 Q110 75 130 50" stroke="#a07080" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M75 110 Q90 100 110 95" stroke="#a07080" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+                <!-- Matcha leaf accent -->
+                <ellipse cx="35" cy="148" rx="10" ry="5" fill="#a8c98a" opacity="0.8" transform="rotate(-40 35 148)"/>
+                <ellipse cx="145" cy="42" rx="8" ry="4" fill="#7aab56" opacity="0.7" transform="rotate(20 145 42)"/>
+            </svg>
+
+            <!-- Falling petals -->
+            <svg class="petal" style="left:15%;top:0;animation-duration:3.2s;animation-delay:0s;width:18px;" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="13" fill="#f4b8cb" opacity="0.8" transform="rotate(20 15 15)"/></svg>
+            <svg class="petal" style="left:35%;top:0;animation-duration:4s;animation-delay:1s;width:14px;" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="13" fill="#f9d0dc" opacity="0.8" transform="rotate(-15 15 15)"/></svg>
+            <svg class="petal" style="left:60%;top:0;animation-duration:3.6s;animation-delay:2s;width:16px;" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="13" fill="#e8829e" opacity="0.6" transform="rotate(40 15 15)"/></svg>
+            <svg class="petal" style="left:78%;top:0;animation-duration:4.4s;animation-delay:0.5s;width:12px;" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="13" fill="#f4b8cb" opacity="0.7" transform="rotate(-30 15 15)"/></svg>
+            <svg class="petal" style="left:50%;top:0;animation-duration:3.8s;animation-delay:3s;width:15px;" viewBox="0 0 30 30"><ellipse cx="15" cy="15" rx="8" ry="13" fill="#fce8ef" opacity="0.9" transform="rotate(10 15 15)"/></svg>
+        </div>
     </div>
-    <div>
-        <a href="/modality/list">modality list</a>
-    </div>
-    <div>
-        <a href="/reservation/list">reservation list</a>
+
+    <div class="quick-links">
+        <a href="/patient/list" class="quick-link-card">
+            <span class="icon" style="color:darkseagreen">˚ʚ♡ɞ˚️</span>
+            <span class="title">Patients</span>
+            <span class="desc">View and manage all registered patients!</span>
+        </a>
+        <a href="/modality/list" class="quick-link-card">
+            <span class="icon" style="color:pink">˚ʚ♡ɞ˚</span>
+            <span class="title">Modalities</span>
+            <span class="desc">Manage MRI, CT, X-Ray and more!</span>
+        </a>
+        <a href="/reservation/list" class="quick-link-card">
+            <span class="icon" style="color:darkseagreen">˚ʚ♡ɞ˚</span>
+            <span class="title">Reservations</span>
+            <span class="desc">Manage new reservations!</span>
+        </a>
     </div>
 </div>
+
 </body>
 </html>

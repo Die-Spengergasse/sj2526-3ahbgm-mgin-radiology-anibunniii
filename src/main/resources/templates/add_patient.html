@@ -2,40 +2,73 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>add new patient</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Add Patient</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
-    <form th:action="@{/patient/add}" th:object="${patient}" method="post">
-        <label>Name </label>
-        <input type="text" th:field="*{name}" class="form-control" placeholder="Patient name">
 
-        <label>Birth date</label>
-        <input type="date" th:field="*{birth}" class="form-control">
+<nav class="navbar">
+    <a href="/" class="navbar-brand">🌸 Radiology</a>
+    <ul class="navbar-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/patient/list" class="active">Patients</a></li>
+        <li><a href="/modality/list" >Modalities</a></li>
+        <li><a href="/reservation/list">Reservations</a></li>
+    </ul>
+</nav>
 
-        <label>SSN</label>
-        <input type="text" th:field="*{ssn}" class="form-control"
-               maxlength="9"
-               pattern="\d{9}"
-               inputmode="numeric"
-               placeholder="123456789"
-               title="SSN must be exactly 9 digits">
+<div class="page">
+    <p class="page-subtitle"><a href="/patient/list" style="text-decoration: none;">← Back to patients</a></p>
+    <h1 class="page-title">New Patient</h1>
+    <p class="page-subtitle">Register a new patient in the system</p>
 
-        <label>Gender</label>
-        <div>
-            <input type="radio" th:field="*{gender}" value="M" id="male">
-            <label for="male">Male</label>
+    <div class="card">
+        <form th:action="@{/patient/add}" th:object="${patient}" method="post">
 
-            <input type="radio" th:field="*{gender}" value="F" id="female">
-            <label for="female">Female</label>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" th:field="*{firstname}" class="form-control" placeholder="First name">
+            </div>
 
-            <input type="radio" th:field="*{gender}" value="D" id="diverse">
-            <label for="diverse">Diverse</label>
-        </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" th:field="*{lastname}" class="form-control" placeholder="Last name">
+            </div>
 
-        <input type="submit" class="form-control" value="Save">
-    </form>
+            <div class="form-group">
+                <label>Birth Date</label>
+                <input type="date" th:field="*{birth}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>SSN</label>
+                <input type="text" th:field="*{ssn}" class="form-control"
+                       maxlength="9" pattern="\d{9}" inputmode="numeric"
+                       placeholder="123456789" title="SSN must be exactly 9 digits">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" th:field="*{gender}" value="M" id="male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" th:field="*{gender}" value="F" id="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" th:field="*{gender}" value="D" id="diverse">
+                        <label for="diverse">Diverse</label>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Save Patient">
+        </form>
+    </div>
 </div>
+
 </body>
 </html>

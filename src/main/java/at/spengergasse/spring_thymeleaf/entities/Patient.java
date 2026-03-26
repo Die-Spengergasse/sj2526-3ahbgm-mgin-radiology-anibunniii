@@ -13,8 +13,10 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column (name = "p_name")
-    private String name;
+    @Column (name = "p_firstname")
+    private String firstname;
+    @Column (name = "p_lastname")
+    private String lastname;
     @Column (name = "p_birth")
     private LocalDate birth;
     @Column(name = "p_ssn")
@@ -26,8 +28,13 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String name, LocalDate birth, long ssn, String gender) {
-        this.name = name;
+    public int getId() {
+        return id;
+    }
+
+    public Patient(String firstname, String lastname, LocalDate birth, long ssn, String gender) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.birth = birth;
         this.ssn = ssn;
         this.gender = gender;
@@ -36,12 +43,29 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", birth=" + birth +
                 ", ssn=" + ssn +
-                ", gender=" + gender +
+                ", gender='" + gender + '\'' +
+                ", reservations=" + reservations +
                 '}';
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public long getSsn() {
@@ -60,13 +84,7 @@ public class Patient {
         this.gender = gender;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public LocalDate getBirth() {
         return birth;

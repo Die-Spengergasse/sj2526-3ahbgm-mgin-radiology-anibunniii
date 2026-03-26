@@ -1,30 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Modality List</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Type</th>
-            <th>Room Nr</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="m : ${modalities}">
-            <td th:text="${m.type}"></td>
-            <td th:text="${m.roomnr}"></td>
-        </tr>
-        </tbody>
-    </table>
 
-    <p>
-        <a href="/modality/add">new modality</a>
-    </p>
+<nav class="navbar">
+    <a href="/" class="navbar-brand">🌸 Radiology</a>
+    <ul class="navbar-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/patient/list">Patients</a></li>
+        <li><a href="/modality/list" class="active">Modalities</a></li>
+        <li><a href="/reservation/list">Reservations</a></li>
+    </ul>
+</nav>
+
+<div class="page">
+    <div class="table-header">
+        <div>
+            <h1 class="page-title">Modalities</h1>
+            <p class="page-subtitle">All imaging devices</p>
+        </div>
+        <a href="/modality/add" class="btn btn-primary">+ Add Modality</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Room Nr</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="m : ${modalities}">
+                <td>
+                    <span class="badge badge-matcha" th:text="${m.type}"></span>
+                </td>
+                <td th:text="${m.roomnr}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 </body>
 </html>
