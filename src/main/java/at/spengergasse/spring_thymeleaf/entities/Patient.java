@@ -23,7 +23,7 @@ public class Patient {
     private long ssn;
     @Column (name = "p_gender")
     private String gender;
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
     public Patient() {
     }
@@ -47,9 +47,7 @@ public class Patient {
                 ", lastname='" + lastname + '\'' +
                 ", birth=" + birth +
                 ", ssn=" + ssn +
-                ", gender='" + gender + '\'' +
-                ", reservations=" + reservations +
-                '}';
+                ", gender='" + gender + "}";
     }
 
     public String getFirstname() {
