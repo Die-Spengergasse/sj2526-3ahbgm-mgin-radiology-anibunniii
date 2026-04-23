@@ -1,8 +1,7 @@
 package at.spengergasse.spring_thymeleaf.controllers;
 
 import at.spengergasse.spring_thymeleaf.entities.*;
-
-import at.spengergasse.spring_thymeleaf.entities.ReservationRepository;
+import at.spengergasse.spring_thymeleaf.services.ReservationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/reservation")
 public class ReservationController {
 
-    private final ReservationRepository reservationRepository;
-   private final PatientRepository patientRepository;
+    private final ReservationService reservationService;
+    private final PatientRepository patientRepository;
     private final ModalityRespository modalityRepository;
 
-    public ReservationController(ReservationRepository reservationRepository,
+    public ReservationController(ReservationService reservationService,
                                  PatientRepository patientRepository,
                                  ModalityRespository modalityRepository) {
-        this.reservationRepository = reservationRepository;
+        this.reservationService = reservationService;
         this.patientRepository = patientRepository;
         this.modalityRepository = modalityRepository;
     }
 
     @GetMapping("/list")
     public String list(Model model) {
-        model.addAttribute("reservations", reservationRepository.findAll());
+        model.addAttribute("reservations", reservationService.findAll());
         return "reservationlist";
     }
 
@@ -38,8 +37,15 @@ public class ReservationController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute Reservation reservation) {
-        reservationRepository.save(reservation);
-        return "redirect:/reservation/list";
+    public String save(@ModelAttribute Reservation reservation, Model model) {
+        try {
+            reservationService.save(reservation);
+            return "redirect:/reservation/list";
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("patients", patientRepository.findAll());
+            model.addAttribute("modalities", modalityRepository.findAll());
+            return "add_reservation";
+        }
     }
 }

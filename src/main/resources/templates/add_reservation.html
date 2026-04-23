@@ -67,6 +67,9 @@
       <input type="submit" class="btn btn-primary" value="Save Reservation">
     </form>
   </div>
+  <div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+  </div>
 </div>
 
 </body>
