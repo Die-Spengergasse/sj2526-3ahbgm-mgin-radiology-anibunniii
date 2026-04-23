@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label>SSN</label>
                 <input type="text" th:field="*{ssn}" class="form-control"
-                       maxlength="9" pattern="\d{9}" inputmode="numeric"
+                       minlength="9" maxlength="9" pattern="\d{9}" inputmode="numeric"
                        placeholder="123456789" title="SSN must be exactly 9 digits">
             </div>
 
