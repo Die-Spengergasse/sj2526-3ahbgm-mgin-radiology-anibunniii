@@ -16,4 +16,14 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     int countOverlapping(@Param("modalityId") Long modalityId,
                          @Param("start") LocalDateTime start,
                          @Param("end") LocalDateTime end);
+
+    @Query(value = """
+        SELECT COUNT(*) FROM reservation
+        WHERE patient_id = :patientId
+        AND reservation_time < :end
+        AND DATE_ADD(reservation_time, INTERVAL 30 MINUTE) > :start
+        """, nativeQuery = true)
+    int countPatientOverlapping(@Param("patientId") int patientId,
+                                @Param("start") LocalDateTime start,
+                                @Param("end") LocalDateTime end);
 }

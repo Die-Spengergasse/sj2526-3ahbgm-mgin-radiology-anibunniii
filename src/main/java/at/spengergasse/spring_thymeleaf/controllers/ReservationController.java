@@ -2,6 +2,7 @@ package at.spengergasse.spring_thymeleaf.controllers;
 
 import at.spengergasse.spring_thymeleaf.entities.*;
 import at.spengergasse.spring_thymeleaf.services.ReservationService;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,9 @@ public class ReservationController {
             model.addAttribute("patients", patientRepository.findAll());
             model.addAttribute("modalities", modalityRepository.findAll());
             return "add_reservation";
+        } catch (DataAccessException e) {
+            model.addAttribute("error", "Database error! Please check if MySQL is running. :0 ");
+            return "error.html";
         }
     }
 }

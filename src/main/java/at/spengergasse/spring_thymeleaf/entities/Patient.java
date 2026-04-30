@@ -1,6 +1,8 @@
 package at.spengergasse.spring_thymeleaf.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +22,8 @@ public class Patient {
     @Column (name = "p_birth")
     private LocalDate birth;
     @Column(name = "p_ssn")
+    @Min(value = 100000000L, message = "SSN must be exactly 9 digits long!")
+    @Max(value = 999999999L, message = "SSN must be exactly 9 digits long!")
     private long ssn;
     @Column (name = "p_gender")
     private String gender;

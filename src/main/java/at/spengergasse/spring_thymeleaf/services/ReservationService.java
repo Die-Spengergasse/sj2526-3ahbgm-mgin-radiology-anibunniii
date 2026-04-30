@@ -22,14 +22,22 @@ public class ReservationService {
         LocalDateTime start = reservation.getReservationTime();
         LocalDateTime end = start.plusMinutes(30);
 
-        boolean conflict = reservationRepository.countOverlapping(
-                (long) reservation.getModality().getId(),
-                start,
-                end
-        ) > 0;
+        if (start.isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("Reservation cannot be in the past!");
+        }
 
-        if (conflict) {
-            throw new IllegalStateException("Dieses Gerät ist in diesem Zeitraum bereits belegt!");
+        boolean modalityConflict = reservationRepository.countOverlapping(
+                (long) reservation.getModality().getId(), start, end) > 0;
+
+        if (modalityConflict) {
+            throw new IllegalStateException("This modality is already reserved for this time slot!");
+        }
+
+        boolean patientConflict = reservationRepository.countPatientOverlapping(
+                reservation.getPatient().getId(), start, end) > 0;
+
+        if (patientConflict) {
+            throw new IllegalStateException("This Patient has already a reservation for this time slot!");
         }
 
         return reservationRepository.save(reservation);
